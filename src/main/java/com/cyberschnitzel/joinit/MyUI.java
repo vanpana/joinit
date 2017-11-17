@@ -1,11 +1,11 @@
-package com.cyberschnitzel;
+package com.cyberschnitzel.joinit;
 
 import javax.servlet.annotation.WebServlet;
 
-import com.cyberschnitzel.Controller.Controller;
-import com.cyberschnitzel.Domain.User;
-import com.cyberschnitzel.Repository.EventRepository;
-import com.cyberschnitzel.Repository.UserRepository;
+import com.cyberschnitzel.joinit.Controller.Controller;
+import com.cyberschnitzel.joinit.Domain.User;
+import com.cyberschnitzel.joinit.Repository.EventRepository;
+import com.cyberschnitzel.joinit.Repository.UserRepository;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
@@ -15,11 +15,6 @@ import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  * This UI is the application entry point. A UI may either represent a browser window 

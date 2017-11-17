@@ -1,8 +1,9 @@
-com/cyberschnitzel/Domain/Event.class
-com/cyberschnitzel/MyUI$MyUIServlet.class
-com/cyberschnitzel/MyUI.class
-com/cyberschnitzel/Repository/EventRepository.class
-com/cyberschnitzel/Domain/User.class
-com/cyberschnitzel/Repository/ARepository.class
-com/cyberschnitzel/Repository/UserRepository.class
-com/cyberschnitzel/Controller/Controller.class
+com/cyberschnitzel/joinit/Repository/UserRepository.class
+com/cyberschnitzel/joinit/Domain/Event.class
+com/cyberschnitzel/joinit/Repository/EventRepository.class
+com/cyberschnitzel/joinit/MyUI$MyUIServlet.class
+com/cyberschnitzel/joinit/Domain/REST/LoginREST.class
+com/cyberschnitzel/joinit/Repository/ARepository.class
+com/cyberschnitzel/joinit/Controller/Controller.class
+com/cyberschnitzel/joinit/Domain/User.class
+com/cyberschnitzel/joinit/MyUI.class

@@ -1,6 +1,6 @@
-package com.cyberschnitzel.Repository;
+package com.cyberschnitzel.joinit.Repository;
 
-import com.cyberschnitzel.Domain.User;
+import com.cyberschnitzel.joinit.Domain.User;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -38,6 +38,24 @@ public class UserRepository extends ARepository<User> {
         try{
             connectDB();
             String query = "SELECT * FROM Users WHERE id = " + id;
+            ResultSet rs = stmt.executeQuery(query);
+            u = getUsers(rs).get(0);
+            rs.close();
+        }
+        catch (SQLException exc){
+            System.out.println(exc.getMessage());
+        }
+        finally {
+            disconnectDB();
+        }
+        return u;
+    }
+
+    public User get(String email){
+        User u = null;
+        try{
+            connectDB();
+            String query = "SELECT * FROM Users WHERE email = \"" + email + "\"";
             ResultSet rs = stmt.executeQuery(query);
             u = getUsers(rs).get(0);
             rs.close();

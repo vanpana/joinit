@@ -1,9 +1,9 @@
-package com.cyberschnitzel.Controller;
+package com.cyberschnitzel.joinit.Controller;
 
-import com.cyberschnitzel.Domain.Event;
-import com.cyberschnitzel.Domain.User;
-import com.cyberschnitzel.Repository.EventRepository;
-import com.cyberschnitzel.Repository.UserRepository;
+import com.cyberschnitzel.joinit.Domain.Event;
+import com.cyberschnitzel.joinit.Domain.User;
+import com.cyberschnitzel.joinit.Repository.EventRepository;
+import com.cyberschnitzel.joinit.Repository.UserRepository;
 
 import java.util.ArrayList;
 
@@ -18,6 +18,11 @@ public class Controller {
 
     public void add(User user){ userrepo.add(user); }
     public void add(Event event){ eventrepo.add(event); }
+
+    public boolean checkLogin(String email, String password){
+        User user = userrepo.get(email);
+        return user != null && user.getPassword().equals(password);
+    }
 
     private User getUserWithEvents(User u){
         ArrayList<Event> userevents = new ArrayList<>();
@@ -35,6 +40,6 @@ public class Controller {
         }
         return users;
     }
-    
+
     public ArrayList<Event> getAllEvents() { return eventrepo.getAll(); }
 }

@@ -1,7 +1,6 @@
-package com.cyberschnitzel.Repository;
+package com.cyberschnitzel.joinit.Repository;
 
-import com.cyberschnitzel.Domain.Event;
-import com.cyberschnitzel.Domain.User;
+import com.cyberschnitzel.joinit.Domain.Event;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

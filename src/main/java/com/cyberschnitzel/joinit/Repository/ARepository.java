@@ -1,4 +1,4 @@
-package com.cyberschnitzel.Repository;
+package com.cyberschnitzel.joinit.Repository;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

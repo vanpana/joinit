@@ -1,4 +1,4 @@
-package com.cyberschnitzel.Domain;
+package com.cyberschnitzel.joinit.Domain;
 
 import java.util.ArrayList;
 
