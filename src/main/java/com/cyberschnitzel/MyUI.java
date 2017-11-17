@@ -12,6 +12,11 @@ import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 /**
  * This UI is the application entry point. A UI may either represent a browser window 
  * (or tab) or some part of an HTML page where a Vaadin application is embedded.
@@ -38,6 +43,22 @@ public class MyUI extends UI {
         layout.addComponents(name, button);
         
         setContent(layout);
+
+        String filename = "/Users/vanpana/Documents/IntelliJ/joinit/data/joinit.db";
+        Connection conn = null;
+        Statement stmt = null;
+        try{
+            Class.forName("org.sqlite.JDBC");
+            conn = DriverManager.getConnection("jdbc:sqlite:" + filename);
+
+            conn.setAutoCommit(true);
+            stmt = conn.createStatement();
+        }
+        catch (SQLException|ClassNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+
+
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
