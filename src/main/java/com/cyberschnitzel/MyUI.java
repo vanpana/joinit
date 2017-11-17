@@ -2,6 +2,10 @@ package com.cyberschnitzel;
 
 import javax.servlet.annotation.WebServlet;
 
+import com.cyberschnitzel.Controller.Controller;
+import com.cyberschnitzel.Domain.User;
+import com.cyberschnitzel.Repository.EventRepository;
+import com.cyberschnitzel.Repository.UserRepository;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
@@ -45,17 +49,9 @@ public class MyUI extends UI {
         setContent(layout);
 
         String filename = "/Users/vanpana/Documents/IntelliJ/joinit/data/joinit.db";
-        Connection conn = null;
-        Statement stmt = null;
-        try{
-            Class.forName("org.sqlite.JDBC");
-            conn = DriverManager.getConnection("jdbc:sqlite:" + filename);
-
-            conn.setAutoCommit(true);
-            stmt = conn.createStatement();
-        }
-        catch (SQLException|ClassNotFoundException e){
-            System.out.println(e.getMessage());
+        Controller ctrl = new Controller(new UserRepository(filename), new EventRepository(filename));
+        for (User usr : ctrl.getAllUsers()){
+            System.out.println(usr);
         }
 
 

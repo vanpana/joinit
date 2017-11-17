@@ -1,0 +1,8 @@
+com/cyberschnitzel/Domain/Event.class
+com/cyberschnitzel/MyUI$MyUIServlet.class
+com/cyberschnitzel/MyUI.class
+com/cyberschnitzel/Repository/EventRepository.class
+com/cyberschnitzel/Domain/User.class
+com/cyberschnitzel/Repository/ARepository.class
+com/cyberschnitzel/Repository/UserRepository.class
+com/cyberschnitzel/Controller/Controller.class

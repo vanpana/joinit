@@ -86,4 +86,18 @@ public class Event {
     public void setAdmin(int admin) {
         this.admin = admin;
     }
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", date='" + date + '\'' +
+                ", time='" + time + '\'' +
+                ", location='" + location + '\'' +
+                ", users=" + users +
+                ", admin=" + admin +
+                '}';
+    }
 }

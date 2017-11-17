@@ -52,7 +52,7 @@ public class UserRepository extends ARepository<User> {
     }
 
     private ArrayList<User> getUsers(ResultSet rs){
-        ArrayList<User> items = new ArrayList<>();
+        ArrayList<User> users = new ArrayList<>();
         try
         {
 
@@ -63,14 +63,14 @@ public class UserRepository extends ARepository<User> {
                 String email = rs.getString("email");
                 String password = rs.getString("password");
 
-                items.add(new User(id, name, surname, email, password));
+                users.add(new User(id, name, surname, email, password));
             }
         }
         catch (SQLException e){
             disconnectDB();
             System.out.println(e.getMessage());
         }
-        return items;
+        return users;
     }
 
     @Override

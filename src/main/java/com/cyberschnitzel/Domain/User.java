@@ -66,4 +66,16 @@ public class User {
     public void setEvents(ArrayList<Event> events) {
         this.events = events;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", events=" + events +
+                '}';
+    }
 }
