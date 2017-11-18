@@ -17,11 +17,11 @@ public class EventRepository extends ARepository<Event> {
     public void add(Event item) {
         try{
             connectDB();
-            String query =  "INSERT INTO Events " +
-                    String.format("VALUES (%d,\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',%d, %d)",
-                            item.getId(),
+            String query =  "INSERT INTO Events (Name, Description, Category, date, time, location, admin, open) " +
+                    String.format("VALUES (\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',%d,%d)",
                             item.getName(),
                             item.getDescription(),
+                            item.getCategory(),
                             item.getDate(),
                             item.getTime(),
                             item.getLocation(),
@@ -30,7 +30,7 @@ public class EventRepository extends ARepository<Event> {
             stmt.execute(query);
         }
         catch (SQLException ex){
-            System.out.print("Add repository: ");
+            System.out.print("Event add repository: ");
             System.out.println(ex.getMessage());
         }
         finally {
