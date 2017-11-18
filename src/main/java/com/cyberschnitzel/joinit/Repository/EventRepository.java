@@ -16,14 +16,15 @@ public class EventRepository extends ARepository<Event> {
         try{
             connectDB();
             String query =  "INSERT INTO Events " +
-                    String.format("VALUES (%d,\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',%d)",
+                    String.format("VALUES (%d,\'%s\',\'%s\',\'%s\',\'%s\',\'%s\',%d, %d)",
                             item.getId(),
                             item.getName(),
                             item.getDescription(),
                             item.getDate(),
                             item.getTime(),
                             item.getLocation(),
-                            item.getAdmin());
+                            item.getAdmin(),
+                            (item.isOpen()) ? 1 : 0);
             stmt.execute(query);
         }
         catch (SQLException ex){
@@ -66,8 +67,12 @@ public class EventRepository extends ARepository<Event> {
                 String time = rs.getString("time");
                 String location = rs.getString("location");
                 int admin = rs.getInt("admin");
+                int openint = rs.getInt("open");
+                boolean open;
+                if (openint == 1) open = true;
+                else open = false;
 
-                events.add(new Event(id, name, description, date, time, location, admin));
+                events.add(new Event(id, name, description, date, time, location, admin, open));
             }
         }
         catch (SQLException e){

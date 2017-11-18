@@ -11,8 +11,9 @@ public class Event {
     private String location;
     private ArrayList<User> users;
     private int admin; //TODO: User admin
+    private boolean open;
 
-    public Event(int id, String name, String description, String date, String time, String location, int admin) {
+    public Event(int id, String name, String description, String date, String time, String location, int admin, boolean open) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -21,6 +22,15 @@ public class Event {
         this.location = location;
         this.users = new ArrayList<>();
         this.admin = admin;
+        this.open = open;
+    }
+
+    public boolean isOpen() {
+        return open;
+    }
+
+    public void setOpen(boolean open) {
+        this.open = open;
     }
 
     public int getId() {
