@@ -22,7 +22,7 @@ public class GetEventsByInterestREST {
         Controller ctrl = new Controller(new UserRepository(filename), new EventRepository(filename));
 
         if (ctrl.checkLogin(email, password)){
-            System.out.println("Requested " + email + " attending events.");
+            System.out.println("Requested " + email + " to get events by interests.");
             return new Gson().toJson(new EventResponse(ctrl.getEventsByUserIntrests(ctrl.getUser(email))));
         }
 

@@ -104,4 +104,12 @@ public class Controller {
     public ArrayList<Invite> getAllByEvent(Event ev){
         return inviterepo.getAll("eventid", ev.getId());
     }
+
+    public void updateInvite(Invite inv){
+        inviterepo.update(inv);
+    }
+
+    public void joinEvent(User u, int eventid){
+        userrepo.joinEvent(u, eventid);
+    }
 }

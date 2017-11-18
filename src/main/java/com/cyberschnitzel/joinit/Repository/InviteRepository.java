@@ -34,6 +34,26 @@ public class InviteRepository extends ARepository<Invite> {
         }
     }
 
+    public void update(Invite item){
+        try{
+            connectDB();
+            String query =  "UPDATE Invites SET response = " +
+                    String.format("%d WHERE eventid = %d and host = %d and guest = %d",
+                            item.getResponse(),
+                            item.getEventid(),
+                            item.getHostid(),
+                            item.getGuestid());
+            stmt.execute(query);
+        }
+        catch (SQLException ex){
+            System.out.print("Invite add repository: ");
+            System.out.println(ex.getMessage());
+        }
+        finally {
+            disconnectDB();
+        }
+    }
+
     public Invite getId(String type, int id){
         Invite event = null;
         try{

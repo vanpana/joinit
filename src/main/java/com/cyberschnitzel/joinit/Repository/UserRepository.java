@@ -133,4 +133,23 @@ public class UserRepository extends ARepository<User> {
         }
         return interests;
     }
+
+    public void joinEvent(User u, int event){
+        try{
+            connectDB();
+
+            String query =  "INSERT INTO UserEvent " +
+                    String.format("VALUES (%d,%d)",
+                            u.getId(),
+                            event);
+            stmt.execute(query);
+        }
+        catch (SQLException ex){
+            System.out.print("UserEvent add repository: ");
+            System.out.println(ex.getMessage());
+        }
+        finally {
+            disconnectDB();
+        }
+    }
 }
