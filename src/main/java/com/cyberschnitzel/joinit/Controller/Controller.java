@@ -39,6 +39,11 @@ public class Controller {
         return false;
     }
 
+    public boolean checkInvite(Invite invite){
+        return inviterepo.getAll().contains(invite);
+
+    }
+
     public ArrayList<Event> getEventsAttendedByUser(User u){
         ArrayList<Event> userevents = new ArrayList<>();
         for (Event event : getAllEvents()){

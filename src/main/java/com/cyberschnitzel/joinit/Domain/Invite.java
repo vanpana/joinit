@@ -50,4 +50,24 @@ public class Invite {
     public String toJSON(){
         return new Gson().toJson(this);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Invite invite = (Invite) o;
+
+        if (eventid != invite.eventid) return false;
+        if (hostid != invite.hostid) return false;
+        return guestid != invite.guestid;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = eventid;
+        result = 31 * result + hostid;
+        result = 31 * result + guestid;
+        return result;
+    }
 }
