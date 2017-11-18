@@ -18,10 +18,11 @@ public class InviteRepository extends ARepository<Invite> {
         try{
             connectDB();
             String query =  "INSERT INTO Invites " +
-                    String.format("VALUES (%d,%d,%d)",
+                    String.format("VALUES (%d,%d,%d,%d)",
                             item.getEventid(),
                             item.getHostid(),
-                            item.getGuestid());
+                            item.getGuestid(),
+                            item.getResponse());
             stmt.execute(query);
         }
         catch (SQLException ex){
@@ -60,8 +61,9 @@ public class InviteRepository extends ARepository<Invite> {
                 int eventid = rs.getInt("eventid");
                 int hostid = rs.getInt("hostid");
                 int guestid = rs.getInt("guestid");
+                int response = rs.getInt("response");
 
-                invites.add(new Invite(eventid, hostid, guestid));
+                invites.add(new Invite(eventid, hostid, guestid, response));
             }
         }
         catch (SQLException e){

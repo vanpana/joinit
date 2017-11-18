@@ -30,7 +30,7 @@ public class InviteREST {
 
         if (ctrl.checkLogin(hostemail, password)){
             System.out.println("User: " + hostemail + " invited " + guestemail + " at event with id " + eventid);
-            ctrl.add(new Invite(eventid, ctrl.getUser(hostemail).getId(), ctrl.getUser(guestemail).getId()));
+            ctrl.add(new Invite(eventid, ctrl.getUser(hostemail).getId(), ctrl.getUser(guestemail).getId(), -1));
             return new Gson().toJson(new ConfirmResponse(true));
         }
         return new Gson().toJson(new ConfirmResponse(false));
