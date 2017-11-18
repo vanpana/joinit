@@ -33,7 +33,7 @@ public class Controller {
 
     public boolean checkLogin(String email, String password){
         User user = userrepo.get(email);
-        if( user != null)
+        if(user != null)
             if(user.getPassword().equals(password))
                 return true;
         return false;

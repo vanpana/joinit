@@ -2,6 +2,7 @@ package com.cyberschnitzel.joinit.Domain.REST;
 
 import com.cyberschnitzel.joinit.Controller.Controller;
 import com.cyberschnitzel.joinit.Domain.Invite;
+import com.cyberschnitzel.joinit.Domain.Response.ConfirmResponse;
 import com.cyberschnitzel.joinit.Domain.Response.InterestResponse;
 import com.cyberschnitzel.joinit.Repository.EventRepository;
 import com.cyberschnitzel.joinit.Repository.InviteRepository;
@@ -30,8 +31,8 @@ public class InviteREST {
         if (ctrl.checkLogin(hostemail, password)){
             System.out.println("User: " + hostemail + " invited " + guestemail + " at event with id " + eventid);
             ctrl.add(new Invite(eventid, ctrl.getUser(hostemail).getId(), ctrl.getUser(guestemail).getId()));
-            return new Gson().toJson(new InterestResponse(ctrl.getUserInterests(ctrl.getUser(hostemail))));
+            return new Gson().toJson(new ConfirmResponse(true));
         }
-        return "";
+        return new Gson().toJson(new ConfirmResponse(false));
     }
 }
