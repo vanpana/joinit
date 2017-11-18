@@ -10,7 +10,7 @@ import com.google.gson.Gson;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
-@Path("/attendingevents")
+@Path("/attendingEvents")
 public class AttendingEventsREST {
     @GET
     @Path("/auth")
@@ -20,7 +20,7 @@ public class AttendingEventsREST {
         Controller ctrl = new Controller(new UserRepository(filename), new EventRepository(filename));
 
         if (ctrl.checkLogin(email, password)){
-            System.out.println("Requested " + email + " attents events.");
+            System.out.println("Requested " + email + " attending events.");
             return new Gson().toJson(new EventResponse(ctrl.getEventsAttendedByUser(ctrl.getUser(email))));
         }
         return "";
