@@ -1,5 +1,7 @@
 package com.cyberschnitzel.joinit.Domain;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 
 public class User {
@@ -8,7 +10,7 @@ public class User {
     private String surname;
     private String email;
     private String password;
-    private ArrayList<Event> events;
+    private transient ArrayList<Event> events;
 
     public User(int id, String name, String surname, String email, String password) {
         this.id = id;
@@ -95,6 +97,7 @@ public class User {
     }
 
     public String toJSON(){
-        return "{id=" + id + ",name=" + name + ",surname=" + surname + ",email" + email + "}";
+        Gson gs = new Gson();
+        return gs.toJson(this);
     }
 }

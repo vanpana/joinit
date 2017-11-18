@@ -1,5 +1,8 @@
 package com.cyberschnitzel.joinit.Domain;
 
+import com.google.gson.Gson;
+import elemental.json.JsonObject;
+
 import java.util.ArrayList;
 
 public class Event {
@@ -10,7 +13,7 @@ public class Event {
     private String date;
     private String time;
     private String location;
-    private ArrayList<User> users;
+    private transient ArrayList<User> users;
     private int admin; //TODO: User admin
     private boolean open;
 
@@ -116,8 +119,11 @@ public class Event {
     }
 
     public String toJSON() {
-        String isopen = open ? "1" : "0";
-        return "{id=" + id + ",name=" + name + ",description=" + description + ",category=" + category + ",date=" + date +
-                    ",time=" + time + ",admin=" + admin + ",open=" + isopen + "}";
+        Gson gs = new Gson();
+        return gs.toJson(this);
+//        String isopen = open ? "1" : "0";
+//        return "{\"id\":\"" + id + "\", \"name\":\"" + name + "\", \"description\":\"" + description + "\", \"category\":\""
+//                + category + "\", \"date\":\"" + date +
+//                    "\", \"time\":\"" + time + "\", \"admin\":\"" + admin + "\", \"open\":\"" + isopen + "\"}";
     }
 }
