@@ -42,14 +42,6 @@ public class MyUI extends UI {
         layout.addComponents(name, button);
         
         setContent(layout);
-
-        String filename = "/Users/vanpana/Documents/IntelliJ/joinit/data/joinit.db";
-        Controller ctrl = new Controller(new UserRepository(filename), new EventRepository(filename));
-        for (User usr : ctrl.getAllUsers()){
-            System.out.println(usr);
-        }
-
-
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
