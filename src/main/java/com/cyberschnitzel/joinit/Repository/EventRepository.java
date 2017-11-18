@@ -28,6 +28,10 @@ public class EventRepository extends ARepository<Event> {
                             item.getAdmin(),
                             (item.isOpen()) ? 1 : 0);
             stmt.execute(query);
+
+            query = "INSERT INTO UserEvent " +
+                    String.format("VALUES (%d, %d)",
+                            item.getAdmin(), item.getId());
         }
         catch (SQLException ex){
             System.out.print("Event add repository: ");
