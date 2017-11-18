@@ -21,8 +21,8 @@ public class LoginREST {
         String filename = "/Users/vanpana/Documents/IntelliJ/joinit/data/joinit.db";
         Controller ctrl = new Controller(new UserRepository(filename), new EventRepository(filename));
 
-        if (ctrl.checkLogin(email, password)) output += "[true]";
-        else output = "[bad login]";
+        if (ctrl.checkLogin(email, password)) output += "true"; //TODO: Check if not null
+        else output = "bad login";
 
         output += "]";
 

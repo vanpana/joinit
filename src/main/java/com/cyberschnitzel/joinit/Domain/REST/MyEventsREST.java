@@ -26,7 +26,7 @@ public class MyEventsREST {
             for (Event ev : ctrl.getAdminedEvents(ctrl.getUser(email)))
                 output += ev.toJSON();
         }
-        else output = "[bad login]";
+        else output = "bad login";
 
         output += "]";
 

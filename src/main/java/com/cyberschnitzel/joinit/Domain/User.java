@@ -11,6 +11,7 @@ public class User {
     private String email;
     private String password;
     private transient ArrayList<Event> events;
+    private transient ArrayList<String> interests;
 
     public User(int id, String name, String surname, String email, String password) {
         this.id = id;
@@ -19,6 +20,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.events = new ArrayList<>();
+        this.interests = new ArrayList<>();
     }
 
     public String getSurname() {
@@ -69,6 +71,14 @@ public class User {
         this.events = events;
     }
 
+    public ArrayList<String> getInterests() {
+        return interests;
+    }
+
+    public void setInterests(ArrayList<String> interests) {
+        this.interests = interests;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -93,6 +103,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", events=" + events +
+                ", interests=" + interests +
                 '}';
     }
 

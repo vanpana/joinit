@@ -93,7 +93,9 @@ public class UserRepository extends ARepository<User> {
             connectDB();
             String query = "SELECT * FROM Users ";
             ResultSet rs = stmt.executeQuery(query);
-            users = getUsers(rs);
+//            users = getUsers(rs);
+            for (User u : getUsers(rs))
+                users.add(setInterests(u));
             rs.close();
         }
         catch (SQLException exc){
@@ -103,5 +105,30 @@ public class UserRepository extends ARepository<User> {
             disconnectDB();
         }
         return users;
+    }
+
+    public User setInterests(User u){
+        u.setInterests(getInterests(u));
+        return u;
+    }
+
+    private ArrayList<String> getInterests(User u) {
+        ArrayList<String> interests= new ArrayList<>();
+        try{
+            connectDB();
+            String query = "SELECT * FROM Interests WHERE userid = " + u.getId();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()){
+                interests.add(rs.getString("interest"));
+            }
+            rs.close();
+        }
+        catch (SQLException exc){
+            System.out.println(exc.getMessage());
+        }
+        finally {
+            disconnectDB();
+        }
+        return interests;
     }
 }
