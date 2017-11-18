@@ -29,6 +29,7 @@ public class CreateEventREST {
         String filename = "/Users/vanpana/Documents/IntelliJ/joinit/data/joinit.db";
         Controller ctrl = new Controller(new UserRepository(filename), new EventRepository(filename));
 
+        //TODO: If successful, add admin to attending
         if (ctrl.checkLogin(email, password)){
             boolean open;
             if (eventopen == 1) open = true;
