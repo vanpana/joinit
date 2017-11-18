@@ -21,12 +21,6 @@ public class MyEventsREST {
 
         if (ctrl.checkLogin(email, password)){
             System.out.println("Requested " + email + " events.");
-            boolean isfirst = true;
-//            for (Event ev : ctrl.getAdminedEvents(ctrl.getUser(email))) {
-//                if (!isfirst) output += ",";
-//                output += ev.toJSON();
-//                if (isfirst) isfirst = false;
-//            }
             return new Gson().toJson(new EventResponse(ctrl.getAdminedEvents(ctrl.getUser(email))));
         }
         return "";
