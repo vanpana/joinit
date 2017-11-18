@@ -112,7 +112,7 @@ public class UserRepository extends ARepository<User> {
         return u;
     }
 
-    private ArrayList<String> getInterests(User u) {
+    public ArrayList<String> getInterests(User u) {
         ArrayList<String> interests= new ArrayList<>();
         try{
             connectDB();

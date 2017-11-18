@@ -23,8 +23,13 @@ public class MyEventsREST {
         Controller ctrl = new Controller(new UserRepository(filename), new EventRepository(filename));
 
         if (ctrl.checkLogin(email, password)){
-            for (Event ev : ctrl.getAdminedEvents(ctrl.getUser(email)))
+            boolean isfirst = true;
+            for (Event ev : ctrl.getAdminedEvents(ctrl.getUser(email))) {
+                if (!isfirst) output += ",";
                 output += ev.toJSON();
+                if (isfirst) isfirst = false;
+
+            }
         }
         else output = "bad login";
 

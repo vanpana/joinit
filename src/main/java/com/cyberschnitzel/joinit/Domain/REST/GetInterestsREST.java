@@ -11,29 +11,21 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Path("/attendingevents")
-public class AttendingEventsREST {
+@Path("/getInterests")
+public class GetInterestsREST {
     @GET
     @Path("/{email},{password}")
     @Produces(MediaType.APPLICATION_JSON)
     public String getMsg(@PathParam("email") String email, @PathParam("password") String password) {
-        String output = "[";
 
+        String output = "";
         String filename = "/Users/vanpana/Documents/IntelliJ/joinit/data/joinit.db";
         Controller ctrl = new Controller(new UserRepository(filename), new EventRepository(filename));
 
         if (ctrl.checkLogin(email, password)){
-            boolean isfirst = true;
-            for (Event ev : ctrl.getEventsAttendedByUser(ctrl.getUser(email))) {
-                if (!isfirst) output += ",";
-                output += ev.toJSON();
-                if (isfirst) isfirst = false;
-            }
-
+            output += ctrl.getUserInterests(ctrl.getUser(email));
         }
         else output = "bad login";
-
-        output += "]";
 
         return output;
     }

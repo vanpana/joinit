@@ -37,6 +37,8 @@ public class Controller {
     public User getUser(String email) { return userrepo.get(email); }
     public User getUser(int id) { return userrepo.get(id); }
 
+    public ArrayList<String> getUserInterests(User u) { return userrepo.getInterests(u); }
+
     public ArrayList<Event> getAdminedEvents(User u){
         ArrayList<Event> adminedevents = new ArrayList<>();
         for (Event event : getAllEvents()){
