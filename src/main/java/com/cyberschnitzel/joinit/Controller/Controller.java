@@ -37,12 +37,16 @@ public class Controller {
     public User getUser(String email) { return userrepo.get(email); }
     public User getUser(int id) { return userrepo.get(id); }
 
-    public User addAdminedEvents(User u){
+    public ArrayList<Event> getAdminedEvents(User u){
         ArrayList<Event> adminedevents = new ArrayList<>();
         for (Event event : getAllEvents()){
             if (event.getAdmin() == u.getId()) adminedevents.add(event);
         }
-        u.setEvents(adminedevents);
+        return adminedevents;
+    }
+
+    public User addAdminedEvents(User u){
+        u.setEvents(getAdminedEvents(u));
         return u;
     }
 
