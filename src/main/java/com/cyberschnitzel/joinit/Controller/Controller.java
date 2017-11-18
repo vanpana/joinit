@@ -6,6 +6,8 @@ import com.cyberschnitzel.joinit.Repository.EventRepository;
 import com.cyberschnitzel.joinit.Repository.UserRepository;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Controller {
     private UserRepository userrepo;
@@ -34,8 +36,8 @@ public class Controller {
     }
 
 
-    public User getUser(String email) { return userrepo.get(email); }
-    public User getUser(int id) { return userrepo.get(id); }
+    public User getUser(String email) { return userrepo.setInterests(addAdminedEvents(userrepo.get(email))); }
+    public User getUser(int id) { return userrepo.setInterests(addAdminedEvents(userrepo.get(id))); }
 
     public ArrayList<String> getUserInterests(User u) { return userrepo.getInterests(u); }
 
@@ -54,7 +56,7 @@ public class Controller {
 
     public ArrayList<User> getAllUsers() {
         ArrayList<User> users = new ArrayList<>();
-        for (User u : userrepo.getAll()) users.add(addAdminedEvents(u));
+        for (User u : userrepo.getAll()) users.add(userrepo.setInterests(addAdminedEvents(u)));
         return users;
     }
 
@@ -62,5 +64,10 @@ public class Controller {
         ArrayList<Event> events = new ArrayList<>();
         for (Event ev : eventrepo.getAll()) events.add(eventrepo.getAttendingUsers(ev));
         return events;
+    }
+
+    public ArrayList<Event> getEventsByUserIntrests(User user){
+        List<String> interests = user.getInterests();
+        return new ArrayList<>(getAllEvents().stream().filter(e ->  interests.contains(e.getCategory())).collect(Collectors.toList())) ;
     }
 }

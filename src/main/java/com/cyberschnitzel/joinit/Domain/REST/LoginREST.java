@@ -18,8 +18,10 @@ public class LoginREST {
         String filename = "/Users/vanpana/Documents/IntelliJ/joinit/data/joinit.db";
         Controller ctrl = new Controller(new UserRepository(filename), new EventRepository(filename));
 
-        if (ctrl.checkLogin(email, password))
+        if (ctrl.checkLogin(email, password)) {
+            System.out.println("Requested " + email + " login.");
             return new Gson().toJson(new ConfirmResponse(true));
+        }
         return new Gson().toJson(new ConfirmResponse(false));
     }
 }
