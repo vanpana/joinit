@@ -1,9 +1,9 @@
 package com.cyberschnitzel.joinit.Domain.Response;
 
-public class AuthResponse {
+public class ConfirmResponse {
     private boolean loginResponse;
 
-    public AuthResponse(boolean loginResponse) {
+    public ConfirmResponse(boolean loginResponse) {
         this.loginResponse = loginResponse;
     }
 

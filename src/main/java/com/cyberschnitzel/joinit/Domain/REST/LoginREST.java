@@ -1,7 +1,7 @@
 package com.cyberschnitzel.joinit.Domain.REST;
 
 import com.cyberschnitzel.joinit.Controller.Controller;
-import com.cyberschnitzel.joinit.Domain.Response.AuthResponse;
+import com.cyberschnitzel.joinit.Domain.Response.ConfirmResponse;
 import com.cyberschnitzel.joinit.Repository.EventRepository;
 import com.cyberschnitzel.joinit.Repository.UserRepository;
 import com.google.gson.Gson;
@@ -19,7 +19,7 @@ public class LoginREST {
         Controller ctrl = new Controller(new UserRepository(filename), new EventRepository(filename));
 
         if (ctrl.checkLogin(email, password))
-            return new Gson().toJson(new AuthResponse(true));
-        return new Gson().toJson(new AuthResponse(false));
+            return new Gson().toJson(new ConfirmResponse(true));
+        return new Gson().toJson(new ConfirmResponse(false));
     }
 }
