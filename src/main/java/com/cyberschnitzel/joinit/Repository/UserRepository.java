@@ -59,7 +59,8 @@ public class UserRepository extends ARepository<User> {
             connectDB();
             String query = "SELECT * FROM Users WHERE email = \"" + email + "\"";
             ResultSet rs = stmt.executeQuery(query);
-            u = getUsers(rs).get(0);
+            if (getUsers(rs).size() > 0)
+                u = getUsers(rs).get(0);
             rs.close();
         }
         catch (SQLException exc){

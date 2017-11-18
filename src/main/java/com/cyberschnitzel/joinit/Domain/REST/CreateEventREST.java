@@ -13,7 +13,6 @@ import javax.ws.rs.core.MediaType;
 @Path("/createEvent")
 public class CreateEventREST {
     @GET
-    @Path("/auth?")
     @Produces(MediaType.APPLICATION_JSON)
     public String getMsg(@QueryParam("email") String email, @QueryParam("password") String password,
                          @QueryParam("eventname") String eventname,

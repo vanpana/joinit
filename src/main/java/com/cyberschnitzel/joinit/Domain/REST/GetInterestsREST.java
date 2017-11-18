@@ -13,7 +13,6 @@ import javax.ws.rs.core.MediaType;
 @Path("/getInterests")
 public class GetInterestsREST {
     @GET
-    @Path("/auth?")
     @Produces(MediaType.APPLICATION_JSON)
     public String getMsg(@QueryParam("email") String email, @QueryParam("password") String password) {
         String filename = "/Users/vanpana/Documents/IntelliJ/joinit/data/joinit.db";

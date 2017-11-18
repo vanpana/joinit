@@ -1,8 +1,10 @@
 package com.cyberschnitzel.joinit.Controller;
 
 import com.cyberschnitzel.joinit.Domain.Event;
+import com.cyberschnitzel.joinit.Domain.Invite;
 import com.cyberschnitzel.joinit.Domain.User;
 import com.cyberschnitzel.joinit.Repository.EventRepository;
+import com.cyberschnitzel.joinit.Repository.InviteRepository;
 import com.cyberschnitzel.joinit.Repository.UserRepository;
 
 import java.util.ArrayList;
@@ -12,18 +14,29 @@ import java.util.stream.Collectors;
 public class Controller {
     private UserRepository userrepo;
     private EventRepository eventrepo;
+    private InviteRepository inviterepo;
 
     public Controller(UserRepository userrepo, EventRepository eventrepo) {
         this.userrepo = userrepo;
         this.eventrepo = eventrepo;
     }
 
+    public Controller(UserRepository userrepo, EventRepository eventrepo, InviteRepository inviterepo) {
+        this.userrepo = userrepo;
+        this.eventrepo = eventrepo;
+        this.inviterepo = inviterepo;
+    }
+
     public void add(User user){ userrepo.add(user); }
     public void add(Event event){ eventrepo.add(event); }
+    public void add(Invite invite){ inviterepo.add(invite); }
 
     public boolean checkLogin(String email, String password){
         User user = userrepo.get(email);
-        return user != null && user.getPassword().equals(password);
+        if( user != null)
+            if(user.getPassword().equals(password))
+                return true;
+        return false;
     }
 
     public ArrayList<Event> getEventsAttendedByUser(User u){
@@ -69,5 +82,21 @@ public class Controller {
     public ArrayList<Event> getEventsByUserIntrests(User user){
         List<String> interests = user.getInterests();
         return new ArrayList<>(getAllEvents().stream().filter(e ->  interests.contains(e.getCategory())).collect(Collectors.toList())) ;
+    }
+
+    public ArrayList<Invite> getAll(){
+        return inviterepo.getAll();
+    }
+
+    public ArrayList<Invite> getAllByUserGuest(User u){
+        return inviterepo.getAll("guestid", u.getId());
+    }
+
+    public ArrayList<Invite> getAllByHostGuest(User u){
+        return inviterepo.getAll("hostid", u.getId());
+    }
+
+    public ArrayList<Invite> getAllByEvent(Event ev){
+        return inviterepo.getAll("eventid", ev.getId());
     }
 }
