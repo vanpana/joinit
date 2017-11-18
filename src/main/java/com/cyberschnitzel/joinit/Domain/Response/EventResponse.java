@@ -18,4 +18,5 @@ public class EventResponse {
     public void setEvents(ArrayList<Event> events) {
         this.events = events;
     }
+
 }
