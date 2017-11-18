@@ -24,22 +24,37 @@ public class Controller {
         return user != null && user.getPassword().equals(password);
     }
 
-    private User getUserWithEvents(User u){
+    public ArrayList<Event> getEventsAttendedByUser(User u){
         ArrayList<Event> userevents = new ArrayList<>();
         for (Event event : getAllEvents()){
-            if (event.getAdmin() == u.getId()) userevents.add(event);
+            if (event.getUsers().contains(u)) userevents.add(event);
         }
         u.setEvents(userevents);
+        return userevents;
+    }
+
+
+    public User getUser(String email) { return userrepo.get(email); }
+    public User getUser(int id) { return userrepo.get(id); }
+
+    public User addAdminedEvents(User u){
+        ArrayList<Event> adminedevents = new ArrayList<>();
+        for (Event event : getAllEvents()){
+            if (event.getAdmin() == u.getId()) adminedevents.add(event);
+        }
+        u.setEvents(adminedevents);
         return u;
     }
 
     public ArrayList<User> getAllUsers() {
         ArrayList<User> users = new ArrayList<>();
-        for (User u : userrepo.getAll()){
-            users.add(getUserWithEvents(u));
-        }
+        for (User u : userrepo.getAll()) users.add(addAdminedEvents(u));
         return users;
     }
 
-    public ArrayList<Event> getAllEvents() { return eventrepo.getAll(); }
+    public ArrayList<Event> getAllEvents() {
+        ArrayList<Event> events = new ArrayList<>();
+        for (Event ev : eventrepo.getAll()) events.add(eventrepo.getAttendingUsers(ev));
+        return events;
+    }
 }

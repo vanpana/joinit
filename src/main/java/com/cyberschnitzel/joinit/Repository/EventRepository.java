@@ -1,6 +1,8 @@
 package com.cyberschnitzel.joinit.Repository;
 
 import com.cyberschnitzel.joinit.Domain.Event;
+import com.cyberschnitzel.joinit.Domain.User;
+import com.cyberschnitzel.joinit.Util.UserParser;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -52,6 +54,29 @@ public class EventRepository extends ARepository<Event> {
             disconnectDB();
         }
         return event;
+    }
+
+    public Event getAttendingUsers(Event ev){
+        ArrayList<User> attendingUsers = new ArrayList<>();
+        try{
+            connectDB();
+            String query = "SELECT * FROM UserEvent " +
+                    "INNER JOIN Users ON UserEvent.userid = Users.id " +
+                    "WHERE eventid = " + ev.getId();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                attendingUsers.add(new UserParser(rs).getUser());
+            }
+            rs.close();
+        }
+        catch (SQLException exc){
+            System.out.println(exc.getMessage());
+        }
+        finally {
+            disconnectDB();
+        }
+        ev.setUsers(attendingUsers);
+        return ev;
     }
 
     private ArrayList<Event> getEvents(ResultSet rs){

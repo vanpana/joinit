@@ -1,6 +1,8 @@
 package com.cyberschnitzel.joinit.Repository;
 
 import com.cyberschnitzel.joinit.Domain.User;
+import com.cyberschnitzel.joinit.Util.UserParser;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -73,15 +75,8 @@ public class UserRepository extends ARepository<User> {
         ArrayList<User> users = new ArrayList<>();
         try
         {
-
             while (rs.next()) {
-                int id = rs.getInt("id");
-                String name = rs.getString("Name");
-                String surname = rs.getString("Surname");
-                String email = rs.getString("email");
-                String password = rs.getString("password");
-
-                users.add(new User(id, name, surname, email, password));
+                users.add(new UserParser(rs).getUser());
             }
         }
         catch (SQLException e){

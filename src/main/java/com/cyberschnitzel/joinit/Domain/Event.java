@@ -110,4 +110,9 @@ public class Event {
                 ", admin=" + admin +
                 '}';
     }
+
+    public String toJSON() {
+        return "{id=" + id + ",name=" + name + ",description=" + description + ",date=" + date +
+                    ",time=" + time + ",admin=" + admin + "}";
+    }
 }
