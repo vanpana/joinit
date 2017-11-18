@@ -13,7 +13,7 @@ public class Event {
     private String date;
     private String time;
     private String location;
-    private transient ArrayList<User> users;
+    private ArrayList<User> users;
     private int admin; //TODO: User admin
     private boolean open;
 
