@@ -88,6 +88,7 @@ public class EventRepository extends ARepository<Event> {
                 int id = rs.getInt("id");
                 String name = rs.getString("Name");
                 String description = rs.getString("Description");
+                String category = rs.getString("Category");
                 String date = rs.getString("date");
                 String time = rs.getString("time");
                 String location = rs.getString("location");
@@ -97,7 +98,7 @@ public class EventRepository extends ARepository<Event> {
                 if (openint == 1) open = true;
                 else open = false;
 
-                events.add(new Event(id, name, description, date, time, location, admin, open));
+                events.add(new Event(id, name, description, category, date, time, location, admin, open));
             }
         }
         catch (SQLException e){
