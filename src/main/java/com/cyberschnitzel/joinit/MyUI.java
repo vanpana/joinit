@@ -3,9 +3,11 @@ package com.cyberschnitzel.joinit;
 import javax.servlet.annotation.WebServlet;
 
 import com.cyberschnitzel.joinit.Controller.Controller;
+import com.cyberschnitzel.joinit.Domain.Response.EventResponse;
 import com.cyberschnitzel.joinit.Domain.User;
 import com.cyberschnitzel.joinit.Repository.EventRepository;
 import com.cyberschnitzel.joinit.Repository.UserRepository;
+import com.google.gson.Gson;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
@@ -42,6 +44,12 @@ public class MyUI extends UI {
         layout.addComponents(name, button);
         
         setContent(layout);
+
+
+        String filename = "/Users/vanpana/Documents/IntelliJ/joinit/data/joinit.db";
+        Controller ctrl = new Controller(new UserRepository(filename), new EventRepository(filename));
+
+        System.out.println(new Gson().toJson(new EventResponse(ctrl.getAllEvents())));
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
