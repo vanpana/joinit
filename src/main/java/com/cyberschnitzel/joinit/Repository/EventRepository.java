@@ -32,6 +32,7 @@ public class EventRepository extends ARepository<Event> {
             query = "INSERT INTO UserEvent " +
                     String.format("VALUES (%d, %d)",
                             item.getAdmin(), item.getId());
+            stmt.execute(query);
         }
         catch (SQLException ex){
             System.out.print("Event add repository: ");
