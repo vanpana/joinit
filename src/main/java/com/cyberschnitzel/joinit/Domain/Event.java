@@ -1,26 +1,49 @@
 package com.cyberschnitzel.joinit.Domain;
 
+import com.google.gson.Gson;
+import elemental.json.JsonObject;
+
 import java.util.ArrayList;
 
 public class Event {
     private int id;
     private String name;
     private String description;
+    private String category;
     private String date;
     private String time;
     private String location;
     private ArrayList<User> users;
     private int admin; //TODO: User admin
+    private boolean open;
 
-    public Event(int id, String name, String description, String date, String time, String location, int admin) {
+    public Event(int id, String name, String description, String category, String date, String time, String location, int admin, boolean open) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.category = category;
         this.date = date;
         this.time = time;
         this.location = location;
         this.users = new ArrayList<>();
         this.admin = admin;
+        this.open = open;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public boolean isOpen() {
+        return open;
+    }
+
+    public void setOpen(boolean open) {
+        this.open = open;
     }
 
     public int getId() {
@@ -93,11 +116,22 @@ public class Event {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", category='" + category + '\'' +
                 ", date='" + date + '\'' +
                 ", time='" + time + '\'' +
                 ", location='" + location + '\'' +
                 ", users=" + users +
                 ", admin=" + admin +
+                ", open=" + open +
                 '}';
+    }
+
+    public String toJSON() {
+        Gson gs = new Gson();
+        return gs.toJson(this);
+//        String isopen = open ? "1" : "0";
+//        return "{\"id\":\"" + id + "\", \"name\":\"" + name + "\", \"description\":\"" + description + "\", \"category\":\""
+//                + category + "\", \"date\":\"" + date +
+//                    "\", \"time\":\"" + time + "\", \"admin\":\"" + admin + "\", \"open\":\"" + isopen + "\"}";
     }
 }

@@ -1,6 +1,8 @@
 package com.cyberschnitzel.joinit.Repository;
 
 import com.cyberschnitzel.joinit.Domain.User;
+import com.cyberschnitzel.joinit.Util.UserParser;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -57,7 +59,9 @@ public class UserRepository extends ARepository<User> {
             connectDB();
             String query = "SELECT * FROM Users WHERE email = \"" + email + "\"";
             ResultSet rs = stmt.executeQuery(query);
-            u = getUsers(rs).get(0);
+            ArrayList<User> users = getUsers(rs);
+            if (users.size() > 0)
+                u = users.get(0);
             rs.close();
         }
         catch (SQLException exc){
@@ -73,15 +77,8 @@ public class UserRepository extends ARepository<User> {
         ArrayList<User> users = new ArrayList<>();
         try
         {
-
             while (rs.next()) {
-                int id = rs.getInt("id");
-                String name = rs.getString("Name");
-                String surname = rs.getString("Surname");
-                String email = rs.getString("email");
-                String password = rs.getString("password");
-
-                users.add(new User(id, name, surname, email, password));
+                users.add(new UserParser(rs).getUser());
             }
         }
         catch (SQLException e){
@@ -98,7 +95,9 @@ public class UserRepository extends ARepository<User> {
             connectDB();
             String query = "SELECT * FROM Users ";
             ResultSet rs = stmt.executeQuery(query);
-            users = getUsers(rs);
+//            users = getUsers(rs);
+            for (User u : getUsers(rs))
+                users.add(setInterests(u));
             rs.close();
         }
         catch (SQLException exc){
@@ -108,5 +107,49 @@ public class UserRepository extends ARepository<User> {
             disconnectDB();
         }
         return users;
+    }
+
+    public User setInterests(User u){
+        u.setInterests(getInterests(u));
+        return u;
+    }
+
+    public ArrayList<String> getInterests(User u) {
+        ArrayList<String> interests= new ArrayList<>();
+        try{
+            connectDB();
+            String query = "SELECT * FROM Interests WHERE userid = " + u.getId();
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()){
+                interests.add(rs.getString("interest"));
+            }
+            rs.close();
+        }
+        catch (SQLException exc){
+            System.out.println(exc.getMessage());
+        }
+        finally {
+            disconnectDB();
+        }
+        return interests;
+    }
+
+    public void joinEvent(User u, int event){
+        try{
+            connectDB();
+
+            String query =  "INSERT INTO UserEvent " +
+                    String.format("VALUES (%d,%d)",
+                            u.getId(),
+                            event);
+            stmt.execute(query);
+        }
+        catch (SQLException ex){
+            System.out.print("UserEvent add repository: ");
+            System.out.println(ex.getMessage());
+        }
+        finally {
+            disconnectDB();
+        }
     }
 }
